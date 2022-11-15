@@ -8,3 +8,10 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
+node_modules/**
+*.vsix
+!out/**
+!CHANGELOG.md
+!LICENSE
+!package.json
+!README.md

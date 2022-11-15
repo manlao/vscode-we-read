@@ -17,14 +17,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - name: Enable corepack
-        run: corepack enable
-      - name: Activate pnpm
-        run: corepack prepare pnpm@7.16.0 --activate
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
-        run: pnpm semantic-release
+        run: npm run semantic-release

@@ -21,10 +21,25 @@
     "微信",
     "微信读书"
   ],
+  "homepage": "https://github.com/manlao/vscode-we-read",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manlao/vscode-we-read.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manlao/vscode-we-read/issues"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://patreon.com/manlao"
+  },
+  "author": {
+    "name": "Sean Tu"
+  },
   "activationEvents": [
     "*"
   ],
-  "main": "./out/extension.js",
+  "main": "./out/main.js",
   "contributes": {
     "commands": [
       {
@@ -34,12 +49,18 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "preesbuild-base": "rimraf ./out",
+    "esbuild-base": "esbuild ./src/main.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "ts-node ./test/runTest.ts"
+    "test": "ts-node ./test/runTest.ts",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.1",
@@ -72,8 +93,10 @@
     "vsce": "^2.14.0"
   },
   "dependencies": {
+    "esbuild": "^0.15.14",
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6",
-    "portfinder": "^1.0.32"
+    "portfinder": "^1.0.32",
+    "rimraf": "^3.0.2"
   }
 }
