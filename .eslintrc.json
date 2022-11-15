@@ -1,0 +1,57 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": ["out", "dist", "**/*.d.ts"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": ["./tsconfig.json"]
+      }
+    },
+    "import/core-modules": ["vscode"],
+    "import/internal-regex": "^src/"
+  },
+  "rules": {
+    "sort-imports": [
+      "warn",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "unknown",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "warnOnUnassignedImports": true
+      }
+    ]
+  }
+}
